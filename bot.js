@@ -1,52 +1,27 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
 var prefix = ".";
-client.on('message', message => { // Leaked by [ @M3a4x ]
-   if(!message.channel.guild) return;
-if(message.content.startsWith(prefix + 'bc')) {
-if(!message.channel.guild) return message.channel.send('**هذا الأمر فقط للسيرفرات**').then(m => m.delete(5000));
-if(!message.member.hasPermission('ADMINISTRATOR')) return
-const args = message.content.split(" ").slice(1).join(" ")
-const BcList = new Discord.RichEmbed()
-.setThumbnail(message.author.avatarURL)
-.setAuthor(`محتوى الرساله : ${args}`)
-.setDescription(`**برودكاست بـ امبد ??\nبرودكاست بدون امبد? \nلديك دقيقه للأختيار قبل الغاء البرودكاست**`)
-if (!args) return message.reply('**يجب عليك كتابة كلمة او جملة لإرسال البرودكاست**');message.channel.send(BcList).then(msg => {
-msg.react('??')
-.then(() => msg.react('?'))
-.then(() =>msg.react('??'))
- 
-var EmbedBcFilter = (reaction, user) => reaction.emoji.name === '??' && user.id === message.author.id;
-var NormalBcFilter = (reaction, user) => reaction.emoji.name === '?' && user.id === message.author.id;
- 
-var EmbedBc = msg.createReactionCollector(EmbedBcFilter, { time: 60000 });
-var NormalBc = msg.createReactionCollector(NormalBcFilter, { time: 60000 });
- 
- 
-EmbedBc.on("collect", r => {
- 
-message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
-message.guild.members.forEach(m => {
-var EmbedRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
-var bc = new
-Discord.RichEmbed()
-.setColor('RANDOM')
-.setDescription(EmbedRep)
-.setThumbnail(message.author.avatarURL)
-m.send({ embed: bc })
-msg.delete();
-})
-})
-NormalBc.on("collect", r => {
-  message.channel.send(`:ballot_box_with_check: تم ارسال الرساله بنجاح`).then(m => m.delete(5000));
-message.guild.members.forEach(m => {
-var NormalRep = args.replace('<server>' ,message.guild.name).replace('<user>', m).replace('<by>', `${message.author.username}#${message.author.discriminator}`)
-m.send(NormalRep);
-msg.delete();
-})
-})
-})
+client.on('message', message => {
+    if (message.author.id === client.user.id) return;
+    if (message.guild) {
+   let embed = new Discord.RichEmbed()
+    let args = message.content.split(' ').slice(1).join(' ');
+if(message.content.split(' ')[0] == prefix + 'bc') {
+    if (!args[1]) {
+return;
 }
+        message.guild.members.forEach(m => {
+   if(!message.member.hasPermission('ADMINISTRATOR')) return;
+            var bc = new Discord.RichEmbed()
+            .addField(' » الرسالة : ', args)
+            .setColor('#ff0000')
+            // m.send(`[${m}]`);
+            m.send(`${m}`,{embed: bc});
+        });
+    }
+    } else {
+        return;
+    }
 });
 
   client.on('message', message => {
@@ -484,7 +459,7 @@ client.on('message',async message => {
   
   
 client.on('message', message => {
-    var prefix = "+";
+    var prefix = ".";
 if(!message.channel.guild) return;
 if(message.content.startsWith(prefix + 'move')) {
  if (message.member.hasPermission("MOVE_MEMBERS")) {
@@ -546,7 +521,7 @@ message.channel.send(`**:white_check_mark: ${user.tag} banned from the server ! 
  
  
 client.on('message', message => {
-const prefix = "+";
+const prefix = ".";
   if (message.author.kick) return;
   if (!message.content.startsWith(prefix)) return;
 
@@ -700,72 +675,16 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
 });
 
 
-
-
-client.on('message', message => {
-    if (message.content == ".fast") {
-        var x = ["DreamKing",
-"DeathGames",
-"زيرو كنج",
-"أرض الأحلام",
-"ألبرازيل",
-"العراق",
-"ألمملكة ألعربية ألسعودية",
-"القسطنطينية",
-"النهاية",
-"امازون",
-"جافاسكربت",
-"سهله مو صعبه",
-"طبق رطب مرق بقر",
-"متجر",
-"شجرة الأوغيري",
-"عش العصفور",
-"هلا بلخميس",
-"الحوت الأزرق",
-];
-        var x2 = ['DreamKing',
-        "DeathGames",
-        "زيرو كنج",
-        "أرض الأحلام",
-		"ألبرازيل",
-		"العراق",
-		"ألمملكة ألعربية ألسعودية",
-		"القسطنطينية",
-		"النهاية",
-		"امازون",
-		"جافاسكربت",
-		"سهله مو صعبه",
-		"طبق رطب مرق بقر",
-		"متجر",
-		"شجرة الأوغيري",
-		"عش العصفور",
-		"هلا بلخميس",
-		"الحوت الأزرق",
-        
-        
-        
-        
-        ];
-        
-        var x3 = Math.floor(Math.random()*x.length)
-        message.channel.send(` اول شخص يكتب :  __**${x[x3]}**__
-لديك 15 ثانية للاجابة`).then(msg1=> {
-            var r = message.channel.awaitMessages(msg => msg.content == x2[x3], {
-                maxMatches : 1,
-                time : 15000,
-                errors : ['time']
-            })
-        r.catch(() => {
-            return message.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
-            الإجآبة الصحيحةة هي __**${x2[x3]}**__`)
-        })
-        
-        r.then((collected)=> {
-            message.channel.send(`${collected.first().author} لقد قمت بكتابة الكلمة في الوقت المناسب  `);
-        })
-        })
-    }
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(**Welcome To Sea World :ocean: :whale:**
+**نتمنىء لك اوقاتء سعيدةء معناء :first_quarter_moon_with_face:**
+ ${member}👑
+👤 انت العضو رقم ${member.guild.memberCount}👤 
+🏁 تاريخ انضمامك للسيرفر ${member.joinedAt.toLocaleString()} 🏁) 
+}).catch(console.error)
 })
+
 
 client.on('ready', () => {
    console.log(`----------------`);
@@ -778,106 +697,5 @@ client.user.setGame(`.help | SeaWorld`,"http://twitch.tv/SeaWorld")
 client.user.setStatus("dnd")
 });
 
-client.on('message', fkk => {
-    if (fkk.content == ".fkk") {
-        var x = ["المتاح للجميع لا يتاح لي",
-"خعاخع",
-"فيلا",
-"بريء",
-"بسم الله الرحمن الرحيم",
-"الضرورة",
-"دنيا",
-"صارم",
-"مات",
-"شعبان شبعان",
-"ألعراق",
-];
-        var x2 = ['ا ل م ت ا ح ل ل ج م ي ع ل ا ي ت ا ح ل ى',
-		"خ ع ا خ ع",
-        "ف ي ل ا",
-		"ب ر ي ء",
-		"ب س م ا ل ل ه ا ل ر ح م ن ا ل ر ح ي م",
-		"ا ل ض ر و ر ة",
-		"د ن ي ا",
-		"ص ا ر م",
-		"م ا ت",
-		"ش ع ب ا ن ش ب ع ا ن",
-		"أ ل ع ر ا ق",
-        
-        
-        
-        
-        ];
-        
-        var x3 = Math.floor(Math.random()*x.length)
-        fkk.channel.send(` اول شخص يفكك :  __**${x[x3]}**__
-لديك 15 ثانية للاجابة`).then(msg1=> {
-            var r = fkk.channel.awaitMessages(msg => msg.content == x2[x3], {
-                maxMatches : 1,
-                time : 15000,
-                errors : ['time']
-            })
-        r.catch(() => {
-            return fkk.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
-            الإجآبة الصحيحةة هي __**${x2[x3]}**__`)
-        })
-        
-        r.then((collected)=> {
-            fkk.channel.send(`${collected.first().author} لقد قمت بتفكيك الجملة في الوقت المناسب  `);
-        })
-        })
-    }
-})
-
-client.on('message', puz => {
-    if (puz.content == ".puz") {
-        var x = ["ما هي حاسة الشم عند الثعبان ؟",
-"ما هو الشي الذي يكسو الناس و هو عار بدون ملابس ؟",
-"ما هو الشي الذي لا يجري و لا يمشي ؟",
-"ما هو إسم الشهر الميلادي الذي إذا حذفت أوله , تحول إلى إسم فاكهه ؟",
-"ما هو الشي الذي لا يدخل الإ إذا ضرب على رأسه ؟",
-"ما هو الشيء الذي اسمه على لونه ؟",
-"ما هو الشي الذي كلما زاد نقص ؟",
-"ما هي التي تحرق نفسها لتفيد غيرها ؟",
-"كله ثقوب و مع ذلك يحفظ الماء ؟",
-"ما هو الذي لحمه من الداخل و عظمه من الخارج ؟",
-"يستطيع ان يخترق الزجاج من دون كسره .. فما هو ؟",
-];
-        var x2 = ['اللسان',
-		"الابره",
-        "الماء",
-		"تموز",
-		"المسمار",
-		"البيضة",
-		"العمر",
-		"الشمعة",
-		"الاسفنج",
-		"السلحفاة",
-		"الضوء",
-        
-        
-        
-        
-        ];
-        
-        var x3 = Math.floor(Math.random()*x.length)
-        puz.channel.send(` اول شخص يفكك :  __**${x[x3]}**__
-لديك 20 ثانية للاجابة`).then(msg1=> {
-            var r = puz.channel.awaitMessages(msg => msg.content == x2[x3], {
-                maxMatches : 1,
-                time : 20000,
-                errors : ['time']
-            })
-        r.catch(() => {
-            return puz.channel.send(`:negative_squared_cross_mark: لقد انتهى الوقت ولم يقم أحد بالأجابة بشكل صحيح 
-            `)
-        })
-        
-        r.then((collected)=> {
-            puz.channel.send(`${collected.first().author} لقد قمت بحل اللغز في الوقت المناسب  `);
-        })
-        })
-    }
-})
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
