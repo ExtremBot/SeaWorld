@@ -715,8 +715,4 @@ client.user.setGame(`.help | SeaWorld`,"http://twitch.tv/SeaWorld")
 client.user.setStatus("dnd")
 });
 
-
-
-
-
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
