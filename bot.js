@@ -725,4 +725,15 @@ client.on('message', message => {
 }
 });
 
+client.on("guildMemberAdd", member => {
+  member.createDM().then(function (channel) {
+  return channel.send(**Welcome To Sea World :ocean: :whale:**
+**نتمنىء لك اوقاتء سعيدةء معناء :first_quarter_moon_with_face:**
+👑اسم العضو  ${member}👑
+👤 انت العضو رقم ${member.guild.memberCount}👤 
+🏁 تاريخ انضمامك للسيرفر ${member.joinedAt.toLocaleString()} 🏁) 
+}).catch(console.error)
+})
+
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
