@@ -50,7 +50,7 @@ msg.delete();
 });
 
   client.on('message', message => {
-    if(message.content.includes('491734578671779840')){
+    if(message.content.includes('496397499456684033')){
                                             if(!message.channel.guild) return message.reply('** advertising me on DM ? ??   **');
         if (!message.member.hasPermissions(['ADMINISTRATOR'])){
         message.delete()
@@ -118,69 +118,6 @@ var definedReactionRole = null;
 
 
 
-  client.on('message', message => {
-      if(message.content.startsWith (".marry")) {
-      if(!message.channel.guild) return message.reply('** This command only for servers **')
-      var proposed = message.mentions.members.first()
-     
-      if(!message.mentions.members.first()) return message.reply(' ?? **لازم تطلب ايد وحدة**').catch(console.error);
-      if(message.mentions.users.size > 1) return message.reply(' ?? **ولد ما يصحلك الا حرمة وحدة كل مرة**').catch(console.error);
-       if(proposed === message.author) return message.reply(`**خنثى ؟ **`);
-        if(proposed === client.user) return message.reply(`** تبي تتزوجني؟ **`);
-              message.channel.send(`**${proposed} 
- بدك تقبلي عرض الزواج من ${message.author} 
- العرض لمدة 15 ثانية  
- اكتبي موافقة او لا**`)
-
-const filter = m => m.content.startsWith("موافقة");
-message.channel.awaitMessages(filter, { max: 1, time: 15000, errors: ['time'] })
-.then(collected =>{ 
-    message.channel.send(` **${message.author} و ${proposed} الف الف مبروك الله , يرزقكم الذرية الصالحة** `);
-})
-
-   const filte = m => m.content.startsWith("لا");
-message.channel.awaitMessages(filte, { max: 1, time: 15000, errors: ['time'] })
-.then(collected =>{ 
-   message.channel.send(`  **${message.author} تم رفض عرضك** `);
-})
-        
-  }
-});
-  
-
- 
-  
-
- 
-  
-client.on('message',  (message) => {
-        if(message.content.startsWith('.kf')) {
-  let user = message.mentions.users.first();
-  if (!user) {
-
-    return message.emit('commandUsage', message, this.help);
-  }
-  let slaps = [
-    'https://i.giphy.com/media/3XlEk2RxPS1m8/giphy.gif',
-    'https://i.giphy.com/media/mEtSQlxqBtWWA/giphy.gif',
-    'https://i.giphy.com/media/j3iGKfXRKlLqw/giphy.gif',
-    'https://i.giphy.com/media/2M2RtPm8T2kOQ/giphy.gif',
-    'https://i.giphy.com/media/l3YSimA8CV1k41b1u/giphy.gif',
-    'https://i.giphy.com/media/WLXO8OZmq0JK8/giphy.gif'
-  ];
-
-  message.channel.send({
-    embed: {
-      description: `${message.author.username} ضربك كف بنص وجهك ${user.username}!`,
-      image: {
-        url: slaps[Math.floor(Math.random() * slaps.length)]
-      }
-    }
-  }).catch(e => {
-    client.log.error(e);
-  })
-        }  
-});
 
 
 
@@ -231,13 +168,10 @@ message.author.send(`
 ❧ .bc ➺ رسالة جماعية لاعضاء السيرفر
 ❧ .link ➺ رابط السيرفر
 ❧ .clear ➺ مسح الرسائل من المحادثة
-❧ .marry ➺ لعبة زواج
-❧ .kf ➺ كف
 ❧ .mc ➺ قفل الروم
 ❧ .umc ➺ فتح الروم
 ❧ .say ➺ البوت يكرر كلام انته تكتبه
 ❧ .Send ➺ ارسال رسالة الى شخص من البوت
-❧ .hacked ➺ لعبة التهكير
 ❧ .apply ➺ تقديم لازم يكون في روم اسمه التقديمات
 ❧ .report ➺ روم التبليغ لازم يكون في روم اسمه reports
 ❧ .bans ➺ معرفة عدد الاشخاص المبندين من السيرفر
@@ -293,37 +227,6 @@ client.on('message', msg => {
 });
 
 
-client.on('message', message => {
-    if (message.content.startsWith(".hacked")) {
-      if (message.author.bot) return
-           message.delete();
-             let args = message.content.split(' ').slice(1);
-                   let virusname = args.join(' ');
-                 if (virusname < 1) {
-                     return message.channel.send("``اكتب اسم الشخص الي تبي يتهكر``");
-                                     }
-                 message.channel.send({embed: new Discord.RichEmbed().setTitle('Loading ' + virusname + "...").setColor(0xFF0000)}).then(function(m) {
-             setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓ ] 1%').setColor(0xFF0000)})
-             }, 1000)
-            setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓] 25%').setColor(0xFF0000)})
-             }, 2000)
-           setTimeout(function() {     
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Loading Discord Virus [▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓▓ ] 100%').setColor(0xFF0000)})
-             }, 3000)
-                setTimeout(function() {
-               m.edit({embed: new Discord.RichEmbed().setTitle('[' + virusname + ']: Uploaded! Initiating explosion in 1...').setColor(0xFF0000)})
-             }, 4000)
-              setTimeout(function() {
-               m.delete()
-           }, 5000)
-             setTimeout(function() {
-               message.channel.send('تم تهكير جهازك راقب ماذا سيحدث تاليا')
-           }, 6000)
-           });
-         }
- });
 
  
  
