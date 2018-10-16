@@ -675,15 +675,7 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
 });
 
 
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(**Welcome To Sea World :ocean: :whale:**
-**نتمنىء لك اوقاتء سعيدةء معناء :first_quarter_moon_with_face:**
- ${member}👑
-👤 انت العضو رقم ${member.guild.memberCount}👤 
-🏁 تاريخ انضمامك للسيرفر ${member.joinedAt.toLocaleString()} 🏁) 
-}).catch(console.error)
-})
+
 
 
 client.on('ready', () => {
