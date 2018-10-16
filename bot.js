@@ -713,7 +713,6 @@ client.user.setGame(`.help | SeaWorld`,"http://twitch.tv/SeaWorld")
 client.user.setStatus("dnd")
 });
 
-var antispam = require("anti-spam");//npm i anti-spam
  
 
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
