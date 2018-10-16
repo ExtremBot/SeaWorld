@@ -702,8 +702,6 @@ if(!message.guild.member(client.user).hasPermission("MUTE_MEMBERS")) return mess
 
 
 
-
-
 client.on('ready', () => {
    console.log(`----------------`);
       console.log(`Desert Bot- Script By : EX Clan`);
@@ -714,14 +712,6 @@ client.on('ready', () => {
 client.user.setGame(`.help | SeaWorld`,"http://twitch.tv/SeaWorld")
 client.user.setStatus("dnd")
 });
-client.on("guildMemberAdd", member => {
-  member.createDM().then(function (channel) {
-  return channel.send(
-**Welcome To Sea World :ocean: :whale:**
-**نتمنىء لك اوقاتء سعيدةء معناء :first_quarter_moon_with_face:**
-👑اسم العضو  ${member}👑
-👤 انت العضو رقم ${member.guild.memberCount}👤 
-🏁 تاريخ انضمامك للسيرفر ${member.joinedAt.toLocaleString()} 🏁) 
-}).catch(console.error)
-})
+
+
 client.login(process.env.BOT_TOKEN);// لا تغير فيها شيء
