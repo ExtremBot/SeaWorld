@@ -716,7 +716,8 @@ client.user.setStatus("dnd")
 });
 client.on("guildMemberAdd", member => {
   member.createDM().then(function (channel) {
-  return channel.send(**Welcome To Sea World :ocean: :whale:** 
+  return channel.send(
+**Welcome To Sea World :ocean: :whale:**
 **نتمنىء لك اوقاتء سعيدةء معناء :first_quarter_moon_with_face:**
 👑اسم العضو  ${member}👑
 👤 انت العضو رقم ${member.guild.memberCount}👤 
